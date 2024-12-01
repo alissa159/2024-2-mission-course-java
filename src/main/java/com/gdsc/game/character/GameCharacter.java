@@ -10,8 +10,8 @@ import java.util.Random;
 public class GameCharacter implements CharacterAction {
     private String name;
     private int hp;
-    private int mp;
-    private int defense;
+    private int mp;  // 마나
+    private int defense;  // 방어력
     private List<SkillAction> skills;
     private Random random;
 
@@ -64,11 +64,11 @@ public class GameCharacter implements CharacterAction {
 
     @Override
     public String getStatus(CharacterAction other) {
-        return String.format("%s hp : %d md: %d | %s hd: %d md: %d\n" +
+        return String.format("%s hp : %d mp: %d | %s hp: %d mp: %d\n" +
                         "1. Attack(1 ~ 10)\n" +
                         "2. Defend(1 ~ 10)\n" +
                         "3. %s\n4. %s\n5. %s",
-                name, hp, mp, other.getName(), other.getHp(), mp,
+                name, hp, mp, other.getName(), other.getHp(), other.getMp(),
                 skills.get(0).getInfo(), skills.get(1).getInfo(), skills.get(2).getInfo());
     }
 
@@ -80,5 +80,14 @@ public class GameCharacter implements CharacterAction {
     @Override
     public int getHp() {
         return hp;
+    }
+
+    // 추가된 메서드: getMp()와 getDefense()
+    public int getMp() {
+        return mp;
+    }
+
+    public int getDefense() {
+        return defense;
     }
 }

@@ -9,4 +9,5 @@ public interface CharacterAction {
     String getStatus(CharacterAction other);
     String getName();
     int getHp();
+    int getMp();
 }
