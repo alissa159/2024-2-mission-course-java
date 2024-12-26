@@ -1,25 +1,16 @@
 package com.gdsc.game.service;
 
-import com.gdsc.game.model.ActionRequest;
-import com.gdsc.game.model.GameStatus;
-import com.gdsc.game.game.GameManager;
-import org.springframework.stereotype.Service;
+import com.gdsc.game.domain.Game;
+import com.gdsc.game.dto.ActionDTO;
+import com.gdsc.game.dto.ActionResultDTO;
+import com.gdsc.game.dto.CharacterCreateDTO;
+import com.gdsc.game.dto.CharacterStatus;
 
-@Service
-public class GameService {
+import java.util.List;
 
-    private final GameManager gameManager = new GameManager();
-
-    public GameStatus initializeGame(GameStatus request) {
-        return gameManager.initialize(request.getPlayers(), request.getTurns());
-    }
-
-    public GameStatus performAction(ActionRequest request) {
-        return gameManager.performAction(
-                request.getAttacker(), request.getDefender(), request.getActionType(), request.getSkillIndex());
-    }
-
-    public GameStatus getGameStatus() {
-        return gameManager.getCurrentStatus();
-    }
+public interface GameService {
+    Game initializeGame(List<CharacterCreateDTO> characters, int turns);
+    ActionResultDTO processAction(String characterName, String actionName);
+    CharacterStatus getCharacterStatus(String name);
+    List<ActionDTO> getAvailableActions(String name, String sortBy);
 }
